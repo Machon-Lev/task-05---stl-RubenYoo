@@ -2,6 +2,7 @@
 #include <fstream>
 #include <map>
 #include <string>
+#include "Coordinate.h"
 
 int main() {
 
@@ -13,14 +14,15 @@ int main() {
         return 1;
     }
 
-    std::map<std::string, std::string> cityToLocation;
-    std::map<std::string, std::string> locationToCity;
+    std::map<std::string, Coordinate> cityToLocation;
+    std::map<Coordinate, std::string> locationToCity;
 
-    std::string key, value;
+    std::string coo, city;
 
-    while (std::getline(inputFile, key) && std::getline(inputFile, value)) {
-        cityToLocation[key] = value;
-        locationToCity[value] = key;
+    while (std::getline(inputFile, coo) && std::getline(inputFile, city)) {
+        Coordinate coordinate(coo);
+        cityToLocation[city] = coordinate;
+        locationToCity[coordinate] = city;
     }
 
     inputFile.close(); 
@@ -30,6 +32,7 @@ int main() {
         std::cout << "Key: " << pair.first << ", Value: " << pair.second << std::endl;
     }
     */
+    
 
 
     return 0;

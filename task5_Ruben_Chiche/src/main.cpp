@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <map>
+#include <List>
 #include <string>
 #include "Coordinate.h"
 
@@ -14,26 +15,36 @@ int main() {
         return 1;
     }
 
-    std::map<std::string, Coordinate> cityToLocation;
-    std::map<Coordinate, std::string> locationToCity;
+    std::map<std::string, Coordinate*> cityToLocation;
+    std::map<Coordinate*, std::string> locationToCity;
 
-    std::string coo, city;
-
-    while (std::getline(inputFile, coo) && std::getline(inputFile, city)) {
-        Coordinate coordinate(coo);
-        cityToLocation[city] = coordinate;
-        locationToCity[coordinate] = city;
+    std::string coordinate, city;
+    
+    while (std::getline(inputFile, city) && std::getline(inputFile, coordinate))
+    {
+        cityToLocation[city] = new Coordinate(coordinate);
+        locationToCity[new Coordinate(coordinate)] = city;
     }
 
     inputFile.close(); 
 
-    /*
-    for (const auto& pair : cityToLocation) {
-        std::cout << "Key: " << pair.first << ", Value: " << pair.second << std::endl;
-    }
-    */
+        
+    double radius;
+    size_t choice;
     
+    std::cout << "Please enter selected city name (with line break after it):" << std::endl;
+    std::getline(std::cin, city);
 
+    auto it = cityToLocation.find(city);
+    if (it == cityToLocation.end())
+        std::cout << "ERROR: \"" << city << "\" isn't found in the city list. Please try again." << std::endl;
+
+    std::cout << "Please enter the wanted radius :" << std::endl;
+    std::cin >> radius;
+
+    std::cout << "Please enter the wanted norm (0 – L2, Euclidean distance, 1 – Linf, Chebyshev distance, 2 – L1, Manhattan distance):" << std::endl;
+    std::cin >> choice;
+    
 
     return 0;
 

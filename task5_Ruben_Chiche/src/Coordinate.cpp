@@ -6,7 +6,7 @@ Coordinate::Coordinate(std::string coordinate)
 
     std::istringstream iss(coordinate);
     double firstValue, secondValue;
-
+    
     if (iss >> firstValue) {
         char separator;
         if (iss.ignore() && iss >> separator && separator == '-' && iss.ignore() && iss >> secondValue) {

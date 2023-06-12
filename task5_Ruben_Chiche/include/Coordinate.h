@@ -5,6 +5,7 @@ class Coordinate {
 	std::pair<double, double> _myCoordinate;
 
 public:
+	Coordinate() {}
 	Coordinate(std::string coordinate);
 	Coordinate(double x, double y);
 	double getX() const;

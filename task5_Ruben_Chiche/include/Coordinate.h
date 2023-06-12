@@ -1,11 +1,12 @@
 #include <iostream>
+#include <string>
 
 class Coordinate {
 	std::pair<double, double> _myCoordinate;
 
 public:
-	Coordinate(double x, double y) { _myCoordinate.first = x; _myCoordinate.second = y; }
-	double getX() { return _myCoordinate.first; } 
-	double getY() { return _myCoordinate.second; }
-
+	Coordinate(std::string coordinate);
+	Coordinate(double x, double y);
+	double getX() const;
+	double getY() const;
 };

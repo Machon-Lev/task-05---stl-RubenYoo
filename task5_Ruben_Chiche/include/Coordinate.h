@@ -11,4 +11,9 @@ public:
 	Coordinate(double x, double y);
 	double getX() const;
 	double getY() const;
+
+	friend std::ostream& operator<<(std::ostream& os, const Coordinate& coordinate) {
+		os << "[" << coordinate.getX() << ", " << coordinate.getY() << "]";
+		return os;
+	}
 };

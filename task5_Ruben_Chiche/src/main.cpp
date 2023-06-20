@@ -74,10 +74,15 @@ int main() {
             return distance <= radius && cityName != city;
         });
 
+    int countCitiesNorth = std::count_if(cityToLocation.begin(), cityToLocation.end(),
+        [&](const auto& pair) {
+            return pair.second->getY() < targetCoordinate->getY();
+        });
+
 
     std::cout << "Search result:" << std::endl;
     std::cout << citiesWithinRadius.size() << " city/cities found in the given radius." << std::endl;
-
+    std::cout << countCitiesNorth << " cities are to the north of the selected city." << std::endl;
 
 
 

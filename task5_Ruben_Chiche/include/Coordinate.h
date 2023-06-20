@@ -8,7 +8,6 @@ class Coordinate {
 public:
 	// constructors
 	Coordinate() {}
-	Coordinate(std::string coordinate);
 	Coordinate(double x, double y);
 
 	// getter

@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <sstream>
 #include <iterator>
 #include "Coordinate.h"
 #include "Distance.h"
@@ -116,15 +117,31 @@ int main() {
 void readData(std::string path, std::map<std::string, Coordinate>& container)
 {
     std::ifstream inputFile;
-    std::string coordinate, city;
+    std::string coordinate, city, line;
+    double x, y;
 
     inputFile.open(path);
-
     if (!inputFile)
         throw std::runtime_error("Could not open file");
-  
-    while (std::getline(inputFile, city) && std::getline(inputFile, coordinate))
-        container.insert({ city, coordinate });
+
+    while (std::getline(inputFile, city))
+    {
+        if (std::getline(inputFile, line))
+        {
+            std::istringstream iss(line);
+            if (iss >> x >> std::ws && iss.peek() == '-' && iss.ignore() && iss >> y)
+            {
+                Coordinate coordinate(x, y);
+                container.insert({ city, coordinate });
+            }
+            else
+                throw std::runtime_error("Location format is wrong");
+        }
+        else
+            throw std::runtime_error("Location of city is missing");
+    }
+    if (container.empty())
+        throw std::runtime_error("The file is empty");
 
     inputFile.close();
 }
